@@ -1,0 +1,7 @@
+{
+  "name": "satark-nepal-app-new",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
