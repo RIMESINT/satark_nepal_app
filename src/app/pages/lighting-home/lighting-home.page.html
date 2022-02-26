@@ -1,0 +1,323 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment (ionChange)="segmentChanged($event)" [(ngModel)]="activeTab" value="current">
+    <ion-segment-button value="current" checked>
+      Current
+    </ion-segment-button>
+    <ion-segment-button value="forcast">
+      Forecast
+    </ion-segment-button>
+  </ion-segment>
+  <br />
+
+  <div [ngSwitch]="activeTab">
+    <div *ngSwitchCase="'current'">
+      <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" style="z-index: 10; margin-top: 10%;">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
+      <div *ngIf="loading" class="skeleton-container">
+        <div class="skeleton skeleton-header"> </div>
+        <div class="skeleton skeleton-card"> </div>
+        <div class="skeleton skeleton-header"> </div>
+        <div class="skeleton skeleton-card-desc"> </div>
+        <div class="skeleton skeleton-header"> </div>
+        <div class="skeleton skeleton-card-desc"> </div>
+      </div>
+
+      <ion-grid *ngIf="(lightning | json) === '{}'">
+        <ion-row class="ion-padding-bottom">
+          <ion-col class="ion-no-padding">
+            <ion-card>
+              <ion-card-content class="ion-no-padding ion-text-center">
+                <ion-label style="font-size: 1.2rem;"><br /><br />No data found<br /><br /><br />
+                </ion-label>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid *ngIf=" (!loading) && (lightning | json) !='{}'" class=" container ion-padding">
+        <ion-row>
+          <ion-col>
+            <ion-label class="ion-padding-start headers">Status</ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-padding-bottom">
+          <ion-col class="ion-no-padding">
+            <ion-card>
+              <ion-card-content class="ion-no-padding">
+                <ion-grid>
+                  <ion-row class=" {{lightning.condition}}">
+                    <ion-col class="card-icon-bg ion-padding-top ion-padding-bottom" size="2.5">
+                      <div class="wrapper">
+                        <ion-icon></ion-icon>
+                      </div>
+                    </ion-col>
+                    <ion-col class="card-content-bg ion-no-padding" size="9.5">
+
+                      <ion-grid>
+                        <ion-row>
+                          <ion-col class="ion-no-padding ion-text-center">
+                            <ion-label class="card-content-location">&nbsp;Lalitpur, NP
+                            </ion-label>
+                          </ion-col>
+                        </ion-row>
+
+                        <ion-row>
+                          <ion-col class="ion-text-center">
+                            <ion-label>{{lightning.condition}}</ion-label>
+                          </ion-col>
+                        </ion-row>
+                      </ion-grid>
+                    </ion-col>
+                  </ion-row>
+
+                </ion-grid>
+              </ion-card-content>
+
+            </ion-card>
+          </ion-col>
+        </ion-row>
+
+        <!-- <ion-row *ngFor="let advise of lightning.advisory">
+          <ion-row class="ion-padding-start">
+            <ion-col>
+              <ion-label class=" headers">{{advise.headerName}}</ion-label>
+            </ion-col>
+          </ion-row>
+
+          <swiper [config]="config" #swiper>
+            <ng-template swiperSlide *ngFor="let content of advise.content">
+              <ion-row class="ion-padding-bottom">
+                <ion-col class="ion-no-padding">
+                  <ion-card>
+                    <ion-card-content>
+                      <div style="height: 100px; display: flex; align-items: center;">
+                        <ion-img class=" " style="height:100%; margin:auto" src="{{content.img}}" alt=" img">
+                        </ion-img>
+                      </div>
+
+                      <div class="swiper-pagination"></div>
+
+                      <ion-label style="font-size: 1.01rem;">
+                        {{content.text}}
+                      </ion-label>
+
+                    </ion-card-content>
+                  </ion-card>
+
+                </ion-col>
+              </ion-row>
+
+            </ng-template>
+          </swiper>
+        </ion-row> -->
+
+
+
+        <ion-row>
+          <ion-col class="ion-padding-start">
+            <ion-label class=" headers">Favourites</ion-label>
+          </ion-col>
+        </ion-row>
+
+
+        <ion-row *ngIf="!favourites?.length">
+          <ion-col>
+            <ion-label class="ion-padding">
+              <p style="text-align: center; font-size: 1.01rem;">
+                You haven’t added any favourites yet.
+              </p>
+            </ion-label>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-no-padding" *ngFor=" let favourite of favourites" (click)="openFavLoc(favourite)">
+          <ion-col class="ion-no-padding favourites">
+            <ion-card class="ion-no-padding">
+              <ion-card-content class="ion-no-padding">
+                <ion-grid>
+                  <ion-row class=" {{favourite.condition}}">
+                    <ion-col class="card-icon-bg " size="2.5">
+                      <div class="wrapper">
+                        <ion-icon></ion-icon>
+                      </div>
+                    </ion-col>
+                    <ion-col class="card-content-bg ion-no-padding" size="9.5">
+                      <!--
+                      style="border-top-right-radius: 0px;border-bottom-right-radius: 0px;"> -->
+
+                      <ion-grid>
+                        <ion-row>
+                          <ion-col class="ion-no-padding ion-text-center">
+                            <ion-label class="card-content-location">&nbsp;{{lightning.location}}
+                            </ion-label>
+                          </ion-col>
+                        </ion-row>
+
+
+                        <ion-row>
+                          <ion-col class="ion-text-center ion-no-padding">
+                            <ion-label>{{favourite.condition}}
+                              <!-- <ion-icon src="../../../../../assets/modules/heatwave/more-next.svg"></ion-icon> -->
+                            </ion-label>
+                          </ion-col>
+                        </ion-row>
+                      </ion-grid>
+                      <div style=" position:absolute; float:right; width: 100%; top: 10px;">
+                        <ion-icon src=" ../../../../../assets/modules/heatwave/more-next.svg"
+                          style="float:right; font-size: 1rem;">
+                        </ion-icon>
+                      </div>
+                    </ion-col>
+
+
+                  </ion-row>
+                </ion-grid>
+              </ion-card-content>
+
+            </ion-card>
+          </ion-col>
+        </ion-row>
+
+        <br />
+      </ion-grid>
+    </div>
+
+
+
+    <div *ngSwitchCase="'forcast'">
+      <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" style="z-index: 10; margin-top: 10%;">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
+      <div *ngIf="loading" class="skeleton-container">
+        <div class="skeleton skeleton-header"> </div>
+        <div class="skeleton skeleton-card"> </div>
+        <div class="skeleton skeleton-header"> </div>
+        <div class="skeleton skeleton-card-desc"> </div>
+        <div class="skeleton skeleton-header"> </div>
+        <div class="skeleton skeleton-card-desc"> </div>
+      </div>
+
+      <ion-grid *ngIf="(lightning | json) === '{}'">
+        <ion-row class="ion-padding-bottom">
+          <ion-col class="ion-no-padding">
+            <ion-card>
+              <ion-card-content class="ion-no-padding ion-text-center">
+                <ion-label style="font-size: 1.2rem;"><br /><br />No data found<br /><br /><br />
+                </ion-label>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid *ngIf=" (!loading) && (lightning | json) !='{}'" class=" container ion-padding">
+        <ion-row>
+          <ion-col>
+            <ion-label class="ion-padding-start headers">Status</ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-padding-bottom">
+          <ion-col class="ion-no-padding">
+            <ion-card>
+              <ion-card-content class="ion-no-padding">
+                <ion-grid>
+                  <ion-row class=" {{lightning.condition}}">
+                    <ion-col class="card-icon-bg ion-padding-top ion-padding-bottom" size="2.5">
+                      <div class="wrapper">
+                        <ion-icon></ion-icon>
+                      </div>
+                    </ion-col>
+                    <ion-col class="card-content-bg ion-no-padding" size="9.5">
+
+                      <ion-grid>
+                        <ion-row>
+                          <ion-col class="ion-no-padding ion-text-center">
+                            <ion-label class="card-content-location">&nbsp;Patan, Nepal
+                            </ion-label>
+                          </ion-col>
+                        </ion-row>
+
+                        <ion-row>
+                          <ion-col class="ion-text-center">
+                            <ion-label>{{lightning.condition}}
+                            </ion-label>
+                          </ion-col>
+                        </ion-row>
+                      </ion-grid>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-card-content>
+
+            </ion-card>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col class="ion-padding-start">
+            <ion-label class=" headers">Favourites</ion-label>
+          </ion-col>
+        </ion-row>
+
+
+        <ion-row *ngIf="!favourites?.length">
+          <ion-col>
+            <ion-label class="ion-padding">
+              <p style="text-align: center; font-size: 1.01rem;">
+                You haven’t added any favourites yet.
+              </p>
+            </ion-label>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-no-padding" *ngFor=" let favourite of favourites" (click)="openFavLoc(favourite)">
+          <ion-col class="ion-no-padding favourites">
+            <ion-card class="ion-no-padding">
+              <ion-card-content class="ion-no-padding">
+                <ion-grid>
+                  <ion-row class=" {{favourite.condition}}">
+                    <ion-col class="card-icon-bg " size="2.5">
+                      <div class="wrapper">
+                        <ion-icon></ion-icon>
+                      </div>
+                    </ion-col>
+                    <ion-col class="card-content-bg ion-no-padding" size="9.5">
+                      <ion-grid>
+                        <ion-row>
+                          <ion-col class="ion-no-padding ion-text-center">
+                            <ion-label class="card-content-location">&nbsp;{{lightning.location}}
+                            </ion-label>
+                          </ion-col>
+                        </ion-row>
+
+                        <ion-row>
+                          <ion-col class="ion-text-center">
+                            <ion-label>{{favourite.condition}}
+                            </ion-label>
+                          </ion-col>
+                        </ion-row>
+                      </ion-grid>
+                    </ion-col>
+                  </ion-row>
+
+                </ion-grid>
+              </ion-card-content>
+
+            </ion-card>
+          </ion-col>
+        </ion-row>
+
+        <br />
+      </ion-grid>
+    </div>
+  </div>
+
+</ion-content>

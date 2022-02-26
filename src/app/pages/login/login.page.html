@@ -1,0 +1,51 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content class="ion-text-center">
+  <div class="background-container">
+    <div class="backgroung-filter">
+      <div class="logo">
+        <img src="/assets/images/logo.png" style="height: 120px;">
+      </div>
+      <div class="container">
+        <form>
+          <div class="app-header">
+            <!-- <h3>Satark-Nepal</h3> -->
+          </div>
+          <h3>Log In</h3>
+          <div class="inputBox">
+            <span>Username</span>
+            <div class="box">
+              <div class="icon"><ion-icon name="person"></ion-icon>
+              </div>
+              <input type="text">
+            </div>
+          </div>
+
+          <div class="inputBox">
+            <span>Password</span>
+            <div class="box">
+              <div class="icon"><ion-icon name="lock-closed"></ion-icon>
+              </div>
+              <input type="password">
+            </div>
+          </div>
+
+          <!-- <label>
+            <input type="checkbox">Remember me
+          </label> -->
+          <div class="inputBox" (click)="login()">
+            <div class="box">
+              <input type="submit" value="log in">
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+</ion-content>
