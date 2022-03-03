@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'satark-nepal-app-new',
+  appId: 'io.satarknepal.app',
+  appName: 'Satark Nepal',
   webDir: 'www',
   bundledWebRuntime: false
 };

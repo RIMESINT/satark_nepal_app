@@ -1,0 +1,129 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>weather forecast</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <ion-grid class="container">
+      <ion-row class="ion-no-padding">
+        <ion-col class="ion-no-padding">
+          <div class="card" *ngIf="day1ecmwf_data != null">
+            <ion-card-header>
+              Today,<span class="card-header-date">{{day1ecmwf_data[0].month_name}}</span>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-grid>
+                <ion-row>
+                  <div class="card-location">
+                    <ion-icon src="../assets/images/location.svg"></ion-icon>
+                    <p>{{this.block_name}}, {{this.district_name}}</p>
+                  </div>
+                </ion-row>
+                <ion-row style="justify-content: center; margin-top: 50px;">
+                  <ion-img style="height: 100px; transform: scale(1.5); "
+                    src="../assets/images/weather/condition/light.gif">
+                  </ion-img>
+                </ion-row>
+
+                <ion-row class="ion-justify-content-center ion-margin-top">
+                  <ion-label class="card-condition">Light rain</ion-label>
+                </ion-row>
+
+                <ion-row class="ion-justify-content-center ion-margin-top" style="
+                margin-top: 15px; margin-left: -15px; margin-right: -15px;">
+                  <ion-col class="col-weather-detail">
+                    <ion-label class="card-temperature-label">Max(°C)</ion-label>
+                    <br />
+                    <ion-label class="card-temperature">{{day1ecmwf_data[0].max_temp}}</ion-label>
+                  </ion-col>
+
+                  <ion-col class="col-weather-detail">
+                    <ion-label class="card-temperature-label">Min(°C)</ion-label>
+                    <br />
+                    <ion-label class="card-temperature">{{day1ecmwf_data[0].min_temp}}</ion-label>
+                  </ion-col>
+
+                  <ion-col class="col-weather-detail">
+                    <ion-label class="card-temperature-label">Humidity(%)</ion-label>
+                    <br />
+                    <ion-label class="card-temperature">{{day1ecmwf_data[0].humidity}}</ion-label>
+                  </ion-col>
+
+                  <ion-col style="padding: 0 10px; text-align: center;">
+                    <ion-label class="card-temperature-label">Wind(Km/hr)</ion-label>
+                    <br />
+                    <ion-label class="card-temperature">{{day1ecmwf_data[0].wind_speed}}</ion-label>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card-content>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid> 
+  </div>
+
+  <div class="container-details">
+    <!-- <div class="drawer-handle"> -->
+      <!-- <div class="drawer-handle-icon"> </div> -->
+      <!-- <div class="drawer-handle-content"> -->
+        <!-- <span class="drawer-handle-content-date">Next 7 Days ></span> -->
+        <div class="future-forecast">
+          <ion-grid>
+            <ion-row class="forecast_container" style="margin-top: 7px;">
+              <!-- <ion-col col-3 class="forecast_container_col">
+                <span class="dates">SUN</span><br>
+                <span class="temp">33°C</span><br>
+                <span class="status">
+                  <img src="../../../assets/images/weather/condition/light_1.gif" style="height: 45px; width: 45px;" />
+                </span>
+              </ion-col>
+              <ion-col col-3 class="forecast_container_col">
+                <span class="dates">MON</span><br>
+                <span class="temp">32°C</span><br>
+                <span class="status">
+                  <img src="../../../assets/images/weather/condition/heavy_1.gif" style="height: 45px; width: 45px;" />
+                </span>
+              </ion-col>
+              <ion-col col-3 class="forecast_container_col">
+                <span class="dates">TUE</span><br>
+                <span class="temp">35°C</span><br>
+                <span class="status">
+                  <img src="../../../assets/images/weather/condition/no_rain_1.gif" style="height: 45px; width: 45px;" />
+                </span>
+              </ion-col> -->
+              <ion-col col-3 class="forecast_container_col" *ngFor="let data of day4ecmwf_data">
+                <span class="dates">{{data.day_name}}</span><br>
+                <span class="temp">{{data.max_temp}}°C</span><br>
+                <span class="status">
+                  <img src="../../../assets/images/weather/condition/very_heavy_1.gif" style="height: 45px; width: 45px;" />
+                </span>
+                <!--         
+                <span class="temp" *ngIf="forecast_data.rain_status == '1'"><img src="assets/imgs/WeatherForecast/light_new.png" style="height: 50px; width: 50px;" /></span>
+                <span class="status" *ngIf="forecast_data.rain_status == '1'">{{"Light" | translate}}</span>
+    
+                <span class="temp" *ngIf="forecast_data.rain_status == '2'"><img src="assets/imgs/WeatherForecast/mod_new.png" style="height: 50px; width: 50px;" /></span>
+                <span class="status" *ngIf="forecast_data.rain_status == '2'">{{"Moderate" | translate}}</span>
+    
+                <span class="temp" *ngIf="forecast_data.rain_status == '3'"><img src="assets/imgs/WeatherForecast/heavy_new.png" style="height: 50px; width: 50px;" /></span>
+                <span class="status" *ngIf="forecast_data.rain_status == '3'">{{"Heavy" | translate}}</span>
+    
+                <span class="temp" *ngIf="forecast_data.rain_status == '4'"><img src="assets/imgs/WeatherForecast/very_heavy_new.png" style="height: 50px; width: 50px;" /></span>
+                <span class="status" style="font-size: 1.2rem;" *ngIf="forecast_data.rain_status == '4'">{{"VeryHeavy" | translate}}</span>
+    
+                <span class="temp" *ngIf="forecast_data.rain_status == '5'"><img src="assets/imgs/WeatherForecast/ex_heavy_rain_new.png" style="height: 50px; width: 50px;" /></span>
+                <span class="status" *ngIf="forecast_data.rain_status == '5'">{{"Extreme" | translate}}</span> -->
+              </ion-col>
+            </ion-row>
+            <ion-row class="row-seven-days">
+              <ion-button color="secondary" class="seven-day-button" (click)="open_modal()">Daily </ion-button>
+            </ion-row>
+          </ion-grid>	
+        </div>
+      <!-- </div> -->
+    <!-- </div> -->
+  </div>
+
+</ion-content>

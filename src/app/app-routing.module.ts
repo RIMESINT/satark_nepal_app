@@ -21,6 +21,14 @@ const routes: Routes = [
   {
     path: 'settings',
     loadChildren: () => import('./pages/settings/settings.module').then( m => m.SettingsPageModule)
+  },
+  {
+    path: 'weather-forecast-home',
+    loadChildren: () => import('./pages/weather-forecast-home/weather-forecast-home.module').then( m => m.WeatherForecastHomePageModule)
+  },
+  {
+    path: 'weather-forecast-daily',
+    loadChildren: () => import('./pages/weather-forecast-daily/weather-forecast-daily.module').then( m => m.WeatherForecastDailyPageModule)
   }
 ];
 @NgModule({

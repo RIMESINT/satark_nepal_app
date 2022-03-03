@@ -19,6 +19,10 @@ const routes: Routes = [
         path: 'settings',
         loadChildren: () => import('../pages/settings/settings.module').then( m => m.SettingsPageModule)
       },
+      {
+        path: 'weather-forecast-home',
+        loadChildren: () => import('../pages/weather-forecast-home/weather-forecast-home.module').then( m => m.WeatherForecastHomePageModule)
+      },
       // {
       //   path: 'tab1',
       //   loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)

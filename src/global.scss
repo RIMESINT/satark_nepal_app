@@ -24,8 +24,14 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+@font-face {   
+    font-family: 'Effra';    //import font
+    src: url('./assets/fonts/Effra_Std_Bd.ttf');
+}
 
 ion-toolbar ion-title{
     color: var(--ion-color-primary);
     float: right;
+    text-transform: uppercase ;
+    font-family: Effra !important;
 }

@@ -1,0 +1,205 @@
+<ion-header class="ion-no-border ion-text-center">
+  <ion-toolbar>
+    <ion-title>Daily</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end" style="opacity: 0;">
+      <ion-button>
+        <ion-icon></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="container">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" style="z-index: 10; margin-top: 10%;">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div *ngIf="loading" class="skeleton-container">
+    <div class="skeleton skeleton-header"> </div>
+    <div class="skeleton skeleton-card"> </div>
+    <div class="skeleton skeleton-header"> </div>
+    <div class="skeleton skeleton-card-desc"> </div>
+    <div class="skeleton skeleton-header"> </div>
+    <div class="skeleton skeleton-card-desc"> </div>
+  </div>
+
+  <div class="drawer-card weather-normal">
+
+    <div class="drawer-card-icon-bg ">
+      <div class="wrapper">
+        <ion-img></ion-img>
+        <ion-label>Sunday</ion-label>
+      </div>
+    </div>
+
+    <div class="drawer-card-content-bg">
+      <div class="drawer-card-content-grid">
+        <div class="drawer-card-content-box">
+          <div>
+            <ion-img class="weather-icon cloud">
+            </ion-img>
+            <ion-label>33°C</ion-label>
+          </div>
+        </div>
+        <div class="drawer-card-content-box">
+          <div>
+            <ion-img class="weather-icon rain"></ion-img>
+            <ion-label>10mm</ion-label>
+          </div>
+        </div>
+        <div class="drawer-card-content-box">
+          <div>
+            <ion-img class="weather-icon wind"></ion-img>
+            <ion-label>100km/s</ion-label>
+          </div>
+        </div>
+        <div class="drawer-card-content-box ">
+          <div>
+            <ion-img class="weather-icon humidity"></ion-img>
+            <ion-label> 12%</ion-label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <ion-grid *ngIf=" (!loading) && (weatherData ) !='{}'">
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            17, Nov
+          </ion-card-header>
+          <ion-card-content>
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <ion-label class="card-rain-level">{{weatherData.weather.rain}}mm</ion-label>
+                  <br />
+                  <ion-label class="card-condition">Light rain</ion-label>
+                </ion-col>
+                <ion-col>
+                  <ion-img class="weather-condition-img">
+                  </ion-img>
+                </ion-col>
+              </ion-row>
+              <ion-row class="ion-padding-top">
+                <div class="card-location">
+                  <ion-icon src="../../../assets/home/card/location.svg"></ion-icon>
+                  <p>Dhankauda, Sambalpur</p>
+                </div>
+              </ion-row>
+
+
+              <ion-row>
+                <ion-grid class="ion-no-padding ion-padding-top">
+                  <ion-row>
+                    <ion-col class="card-content-bg">
+                      <div>
+                        <ion-img class="weather-icon temp-high">
+                        </ion-img>
+                        <ion-label>{{weatherData.weather.temperatureHigh}}° C</ion-label>
+                      </div>
+                    </ion-col>
+                    <ion-col class="card-content-bg">
+                      <div>
+                        <ion-img class="weather-icon temp-low">
+                        </ion-img>
+                        <ion-label>{{weatherData.weather.temperatureLow}}° C</ion-label>
+                      </div>
+                    </ion-col>
+                    <ion-col class="card-content-bg">
+                      <div>
+                        <ion-img class="weather-icon humidity">
+                        </ion-img>
+                        <ion-label>{{weatherData.weather.humidity}}%</ion-label>
+                      </div>
+                    </ion-col>
+                    <ion-col class="card-content-bg">
+                      <div>
+                        <ion-img class="weather-icon wind">
+                        </ion-img>
+                        <ion-label>{{weatherData.weather.wind}}Km/s</ion-label>
+                      </div>
+                    </ion-col>
+
+                  </ion-row>
+                </ion-grid>
+              </ion-row>
+
+            </ion-grid>
+
+          </ion-card-content>
+
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf=" (!loading) && (weatherData.forcast | json) !='{}'">
+      <ion-col>
+        <ion-label class="ion-padding-start">Forcast for next 5 days</ion-label>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row>
+      <ion-col class="weather-forcast">
+        <ion-card>
+          <ion-grid>
+            <ion-row style="color: var(--ion-color-primary);">
+              <ion-col class="ion-padding-start">
+                day
+              </ion-col>
+              <ion-col>
+                <ion-icon style="font-size: 1.3rem;" src="../../../../../assets/modules/weather/rain.svg"></ion-icon>
+              </ion-col>
+              <ion-col>
+                <ion-icon style="font-size: 1.3rem;" src="../../../../../assets/modules/weather/temp_high_b.svg">
+                </ion-icon>
+              </ion-col>
+              <ion-col>
+                <ion-icon style="font-size: 1.3rem;" src="../../../../../assets/modules/weather/temp_low_b.svg">
+                </ion-icon>
+              </ion-col>
+              <ion-col>
+                <ion-icon style="font-size: 1.3rem;" src="../../../../../assets/modules/weather/humidity_b.svg">
+                </ion-icon>
+              </ion-col>
+              <ion-col>
+                <ion-icon style="font-size: 1.3rem;" src="../../../../../assets/modules/weather/wind_b.svg">
+                </ion-icon>
+              </ion-col>
+
+            </ion-row>
+
+            <ion-row *ngFor="let forcast of weatherData.forcast">
+              <ion-col class="ion-padding-start">
+                {{forcast.day}}
+              </ion-col>
+              <ion-col>
+                {{forcast.rain}}<span style="font-size: 0.6rem;">mm</span>
+              </ion-col>
+              <ion-col>
+                {{forcast.temperatureHigh}}° <span style="font-size: 0.6rem;">C</span>
+              </ion-col>
+              <ion-col>
+                {{forcast.temperatureLow}}°<span style="font-size: 0.6rem;">C</span>
+              </ion-col>
+              <ion-col>
+                {{forcast.humidity}}%
+              </ion-col>
+              <ion-col>
+                {{forcast.wind}} <span style="font-size: 0.6rem;">km/s</span>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+
+  </ion-grid> -->
+</ion-content>
