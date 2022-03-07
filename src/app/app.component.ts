@@ -21,6 +21,7 @@ export class AppComponent {
       // this.statusBar.styleDefault();
       // this.splashScreen.hide();
       // this.screenOrientation.lock('portrait');
+      console.log("app started");
       this.session = localStorage.getItem('isLoggedIn');
       console.log("session..", this.session);
       if(this.session === "loggedIn"){

@@ -1,0 +1,12 @@
+{
+	"appId": "io.satarknepal.app",
+	"appName": "Satark Nepal",
+	"webDir": "www",
+	"bundledWebRuntime": false,
+	"plugins": {
+		"SplashScreen": {
+			"launchAutoHide": false,
+			"showSpinner": true
+		}
+	}
+}

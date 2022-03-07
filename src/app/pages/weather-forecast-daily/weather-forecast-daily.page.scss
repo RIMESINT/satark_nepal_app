@@ -11,7 +11,7 @@
   .drawer-card-icon-bg {
     border-radius: 10px 0 0 10px;
     height: 100%;
-    width: 25%;
+    width: 15%;
     display: flex;
     align-items: center;
   
@@ -40,7 +40,7 @@
   
   .drawer-card-content-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     column-gap: 10px;
     margin: auto 10px;
     width: 100%;
@@ -67,10 +67,16 @@
       content: url("/assets/images/weather/rain.svg");
     }
     .wind {
-      content: url("/assets/images/weather/wind.svg");
+      content: url("/assets/images/weather/wind_b.svg");
     }
     .humidity {
-      content: url("/assets/images/weather/humidity.svg");
+      content: url("/assets/images/weather/humidity_b.svg");
+    }
+    .temp-high {
+      content: url("/assets/images/weather/temp_high_b.svg");
+    }
+    .temp-low {
+      content: url("/assets/images/weather/temp_low_b.svg");
     }
   
     ion-label {

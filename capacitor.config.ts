@@ -4,7 +4,14 @@ const config: CapacitorConfig = {
   appId: 'io.satarknepal.app',
   appName: 'Satark Nepal',
   webDir: 'www',
-  bundledWebRuntime: false
+  bundledWebRuntime: false,
+  "plugins": {
+    "SplashScreen": {
+      "launchAutoHide": false,
+      "showSpinner": true
+    }
+  }
 };
+
 
 export default config;

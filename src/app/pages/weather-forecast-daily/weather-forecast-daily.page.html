@@ -27,12 +27,12 @@
     <div class="skeleton skeleton-card-desc"> </div>
   </div>
 
-  <div class="drawer-card weather-normal">
+  <div class="drawer-card weather-normal" *ngFor="let data of day10ecmwf_data">
 
     <div class="drawer-card-icon-bg ">
       <div class="wrapper">
         <ion-img></ion-img>
-        <ion-label>Sunday</ion-label>
+        <ion-label>{{data.day_name}}</ion-label>
       </div>
     </div>
 
@@ -40,27 +40,34 @@
       <div class="drawer-card-content-grid">
         <div class="drawer-card-content-box">
           <div>
-            <ion-img class="weather-icon cloud">
+            <ion-img class="weather-icon temp-high">
             </ion-img>
-            <ion-label>33°C</ion-label>
+            <ion-label>{{data.max_temp}}°C</ion-label>
+          </div>
+        </div>
+        <div class="drawer-card-content-box">
+          <div>
+            <ion-img class="weather-icon temp-low">
+            </ion-img>
+            <ion-label>{{data.min_temp}}°C</ion-label>
           </div>
         </div>
         <div class="drawer-card-content-box">
           <div>
             <ion-img class="weather-icon rain"></ion-img>
-            <ion-label>10mm</ion-label>
+            <ion-label>{{data.rainfall}}mm</ion-label>
           </div>
         </div>
         <div class="drawer-card-content-box">
           <div>
             <ion-img class="weather-icon wind"></ion-img>
-            <ion-label>100km/s</ion-label>
+            <ion-label>{{data.wind_speed}}km/s</ion-label>
           </div>
         </div>
         <div class="drawer-card-content-box ">
           <div>
             <ion-img class="weather-icon humidity"></ion-img>
-            <ion-label> 12%</ion-label>
+            <ion-label>{{data.humidity}}%</ion-label>
           </div>
         </div>
       </div>
